@@ -1,3 +1,6 @@
+pika
+Flask-Mail
+
 alembic==1.0.8
 Click==7.0
 Flask==1.0.2

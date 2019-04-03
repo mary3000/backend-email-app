@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+    rabbitmq:
+        image: rabbitmq:3-management
+        hostname: rabbitmq
+        restart: always
+        ports:
+            - 5672:5672
+            - 15672:15672
+
+    flask-app:
+        build:
+          flask-app
+        links:
+          - rabbitmq
+        ports:
+          - 8080:8080
+
+    mail-sender:
+        build: mail-sender
+        links:
+            - rabbitmq
+            - flask-app

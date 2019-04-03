@@ -1,7 +1,9 @@
-from web_app import db
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
+
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from web_app import db
 from web_app import login_manager
 
 
@@ -15,6 +17,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    confirmed = db.Column(db.Boolean)
+    token = db.Column(db.String, unique=True)
     posts = db.relationship('Post', backref='author')
 
     def set_password(self, password):
@@ -22,6 +26,9 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def is_authenticated(self):
+        return self.confirmed
 
 
 class Post(db.Model):
