@@ -1,5 +1,5 @@
 # backend-email-app
-Flask + RabbitMQ + SQLAlchemy + some other Python libraries
+Flask + RabbitMQ + Postgres + some Python libraries
 
 Run this application with `bash run.sh`
 
