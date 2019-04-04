@@ -2,10 +2,20 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'strong-password'
+    SECRET_KEY = 'foobarbaz'
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
+    DBUSER = 'marco'
+    DBPASS = 'foobarbaz'
+    DBHOST = 'db'
+    DBPORT = '5432'
+    DBNAME = 'testdb'
+
+    SQLALCHEMY_DATABASE_URI = \
+        'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}'.format(
+            user=DBUSER,
+            passwd=DBPASS,
+            host=DBHOST,
+            port=DBPORT,
+            db=DBNAME)
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-

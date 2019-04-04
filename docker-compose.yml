@@ -21,3 +21,8 @@ services:
         links:
             - rabbitmq
             - flask-app
+    db:
+        image: postgres:10
+        env_file: .env
+        expose:
+            - 5432
